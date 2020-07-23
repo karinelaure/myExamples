@@ -28,23 +28,34 @@ public class BallsInCells {
             arr[0] = balls;
             System.out.println(Arrays.toString(arr));
         }
-        while (end){
-            num= arr[step];
-            if(num > 1 || step >= cells-1){
-                step =0;
+        while(arr[cells-1] != balls){
+            if(step >= cells-1) {
+                if(arr[step-1] == 0) {
+                    step = 0;
+                    num = arr[0];
+                    arr = new int[cells];
+                } else{
+                    step --;
+                }
+
+                arr[step] = num;
             }
-            //num= arr[step];
-            arr[step]=num-1;
-            arr[++step]++;
+            num = --arr[step];
+            if(step ==0){
+                arr[step+1] = balls-num;
+            } else {
+                arr[step + 1]++;
+            }
+            step++;
+
             System.out.println(Arrays.toString(arr));
-            end =arr[cells-1]!=balls;
+
         }
     }
 
     public static void main(String[] args){
         BallsInCells gener = new BallsInCells();
         gener.combination(3,3);
-
 
     }
 }
